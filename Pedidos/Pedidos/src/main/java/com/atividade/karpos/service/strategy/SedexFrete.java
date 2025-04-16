@@ -1,6 +1,6 @@
-package com.atividade.karpos.controller;
+package com.atividade.karpos.service.strategy;
 
-@Component("expressa")
+
 public class SedexFrete implements FreteStrategy {
     @Override
     public double calcularFrete(double peso) {

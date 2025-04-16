@@ -1,4 +1,4 @@
-package com.atividade.karpos.controller;
+package com.atividade.karpos.service.strategy;
 
 public interface FreteStrategy {
     double calcularFrete(double valor);

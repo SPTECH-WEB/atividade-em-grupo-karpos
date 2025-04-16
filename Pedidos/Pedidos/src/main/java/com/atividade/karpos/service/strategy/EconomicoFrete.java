@@ -1,6 +1,6 @@
-package com.atividade.karpos.controller;
+package com.atividade.karpos.service.strategy;
 
-@Component("economica")
+
 public class EconomicoFrete implements FreteStrategy {
     @Override
     public double calcularFrete(double peso) {
