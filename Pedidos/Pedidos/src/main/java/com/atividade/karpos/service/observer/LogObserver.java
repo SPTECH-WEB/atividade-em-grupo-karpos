@@ -1,10 +1,11 @@
 package com.atividade.karpos.service.observer;
 
 import com.atividade.karpos.model.Pedido;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LogObserver implements PedidoObserver {
-    @Override
     public void notificar(Pedido pedido) {
-        System.out.println("📝 Log: Pedido de " + pedido.getProduto() + " processado.");
+        System.out.println("📝 Log: Pedido de " + pedido.getId() + " processado.");
     }
 }

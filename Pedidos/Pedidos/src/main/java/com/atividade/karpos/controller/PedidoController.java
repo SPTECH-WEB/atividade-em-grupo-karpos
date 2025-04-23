@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
-    private FreteService service;
+    private final FreteService service;
 
     public PedidoController(FreteService service) {
         this.service = service;
@@ -23,9 +23,4 @@ public class PedidoController {
         return ResponseEntity.ok("Valor do frete: R$ " + valor);
     }
 
-    @PostMapping
-    public ResponseEntity<Pedido> criarPedido(@RequestBody Pedido pedido) {
-        Pedido pedidoProcessado = freteService.processarPedido(pedido);
-        return ResponseEntity.ok(pedidoProcessado);
-    }
 }

@@ -20,4 +20,5 @@ public class Pedido {
     private String pedido;
     private Double preco;
     private String tipoEntrega;
+
 }
