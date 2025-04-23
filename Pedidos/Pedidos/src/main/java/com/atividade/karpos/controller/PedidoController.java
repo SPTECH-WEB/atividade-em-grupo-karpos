@@ -22,4 +22,10 @@ public class PedidoController {
         double valor = service.calcularFrete(request.getPreco(), request.getTipoEntrega());
         return ResponseEntity.ok("Valor do frete: R$ " + valor);
     }
+
+    @PostMapping
+    public ResponseEntity<Pedido> criarPedido(@RequestBody Pedido pedido) {
+        Pedido pedidoProcessado = freteService.processarPedido(pedido);
+        return ResponseEntity.ok(pedidoProcessado);
+    }
 }
