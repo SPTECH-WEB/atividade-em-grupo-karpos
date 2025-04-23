@@ -2,6 +2,7 @@ package com.atividade.karpos.controller;
 
 import com.atividade.karpos.model.Pedido;
 import com.atividade.karpos.service.FreteService;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/pedidos")
-public class PedidoController {
+public class PedidoController implements PedidoControllerDoc {
     private final FreteService service;
 
     public PedidoController(FreteService service) {

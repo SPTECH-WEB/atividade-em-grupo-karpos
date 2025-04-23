@@ -18,7 +18,7 @@ public class Pedido {
     private Long id;
     private String cliente;
     private String pedido;
-    private Double preco;
+    private Double peso;
     private String tipoEntrega;
 
 }

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Pedidos.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Pedidos.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/atividade-em-grupo-karpos.iml" filepath="$PROJECT_DIR$/.idea/atividade-em-grupo-karpos.iml" />
     </modules>
   </component>
