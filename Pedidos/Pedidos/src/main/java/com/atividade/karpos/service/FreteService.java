@@ -1,33 +1,42 @@
 package com.atividade.karpos.service;
 
 import com.atividade.karpos.model.Pedido;
-import com.atividade.karpos.service.strategy.FreteStrategy;
+import com.atividade.karpos.repository.PedidoRepository;
+import com.atividade.karpos.service.adapter.TransportadoraAdapter;
 import com.atividade.karpos.service.observer.PedidoSubject;
+import com.atividade.karpos.service.strategy.FreteStrategy;
 import com.atividade.karpos.service.observer.EmailObserver;
 import com.atividade.karpos.service.observer.LogObserver;
-import com.atividade.karpos.service.observer.NotificacaoObserver;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
 
 @Service
 public class FreteService {
-    private Map<String, FreteStrategy> estrategias;
+    private final PedidoRepository repository;
+    private final PedidoSubject observer;
+    private final TransportadoraAdapter adapter;
 
-    public double calcularFrete(Double peso, String modalidade) {
-        FreteStrategy estrategia = estrategias.get(modalidade.toLowerCase());
-        if (estrategia == null) throw new IllegalArgumentException("Modalidade invalida");
-        double valor = estrategia.calcularFrete(peso);
-        return valor;
+    public FreteService(PedidoRepository repository, PedidoSubject observer, TransportadoraAdapter adapter) {
+        this.repository = repository;
+        this.observer = observer;
+        this.adapter = adapter;
+
+        observer.adicionarObserver(new LogObserver());
+        observer.adicionarObserver(new EmailObserver());
     }
-    public Pedido processarPedido(Pedido pedido) {
 
-        PedidoSubject subject = new PedidoSubject();
-        subject.adicionarObserver(new EmailObserver());
-        subject.adicionarObserver(new LogObserver());
-        subject.adicionarObserver(new NotificacaoObserver());
-        subject.notificarObservers(pedido);
+    public Pedido salvarPedido(Pedido pedido, FreteStrategy strategy) {
+        double frete = strategy.calcularFrete(pedido.getPeso());
+        String mensagem = "Pedido processado: " + pedido.getProduto() + " | Frete: R$ " + frete;
+        observer.notificarObservers(mensagem);
 
-        return pedido;
+        adapter.enviarPedido(pedido);
+
+        return repository.save(pedido);
+    }
+
+    public List<Pedido> listarPedidos(){
+        return repository.findAll();
     }
 }

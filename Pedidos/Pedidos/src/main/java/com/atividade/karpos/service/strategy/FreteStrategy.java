@@ -1,5 +1,5 @@
 package com.atividade.karpos.service.strategy;
 
 public interface FreteStrategy {
-    double calcularFrete(double valor);
+    double calcularFrete(double peso);
 }

@@ -1,13 +1,15 @@
 package com.atividade.karpos.service.adapter;
 
-public class TransportadoraAdapter {
-    private final TransportadoraApiExterna api;
+import com.atividade.karpos.model.Pedido;
+import org.springframework.stereotype.Component;
 
-    public TransportadoraAdapter(TransportadoraApiExterna api) {
-        this.api = api;
+@Component
+public class TransportadoraAdapter {
+    public String enviarPedido(Pedido pedido) {
+        return "Pedido enviado à transportadora: " + pedido.getProduto();
     }
 
-    public double calcularFrete(Double peso) {
-        return api.calcularFrete(peso);
+    public double calcularFrete(double peso) {
+        return peso * 20;
     }
 }
