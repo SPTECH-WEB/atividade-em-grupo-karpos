@@ -20,7 +20,7 @@ public class PedidoController implements PedidoControllerDoc {
 
     @PostMapping
     public ResponseEntity<String> calcularFrete(@RequestBody Pedido request) {
-        double valor = service.calcularFrete(request.getPreco(), request.getTipoEntrega());
+        double valor = service.calcularFrete(request.getPeso(), request.getTipoEntrega());
         return ResponseEntity.ok("Valor do frete: R$ " + valor);
     }
 
