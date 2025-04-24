@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
         }
 )
 public interface PedidoControllerDoc {
+
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -35,7 +36,7 @@ public interface PedidoControllerDoc {
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     examples = {
                                             @ExampleObject(
-                                                    name = "Obteve êxito na criação do pedido",
+                                                    name = "Exemplo de sucesso",
                                                     value = """
                                                             {
                                                                 "id": "1",
@@ -49,7 +50,20 @@ public interface PedidoControllerDoc {
                                     }
                             )
                     }
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Requisição inválida",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Erro interno no servidor",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
             )
     })
-    ResponseEntity<String> calcularFrete(@Valid @RequestBody Pedido request);
+    ResponseEntity<String> calcularFrete(
+            @Parameter(description = "Dados do pedido para cálculo do frete", required = true)
+            @Valid @RequestBody Pedido request
+    );
 }
